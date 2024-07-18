@@ -52,17 +52,17 @@ menu = {
 
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
-
+order = []
 
 # Launch the store and present a greeting to the customer
-print("Welcome to the variety food truck.")
+print("Welcome to the variety food truck!")
 
 # Customers may want to order multiple items, so let's create a continuous
 # loop
 place_order = True
 while place_order:
     # Ask the customer from which menu category they want to order
-    print("From which menu would you like to order? ")
+    print("From which menu would you like to order?")
 
     # Create a variable for the menu item number
     i = 1
@@ -117,32 +117,46 @@ while place_order:
                         "Price": value
                     }
                     i += 1
+            
             # 2. Ask customer to input menu item number
-
+            menu_selection = input(f"Type the number to order from our list of {menu_category_name.lower()}: ")
 
             # 3. Check if the customer typed a number
-
+            if menu_selection.isdigit():
                 # Convert the menu selection to an integer
-
+                menu_selection = int(menu_selection)
 
                 # 4. Check if the menu selection is in the menu items
-
+                if menu_selection in menu_items:
                     # Store the item name as a variable
+                    item_name = menu_items[menu_selection]["Item name"]
+                    item_price = menu_items[menu_selection]["Price"]
 
+                    # print("item",  menu_items[menu_selection])
+                    # print("item_name", item_name)
 
                     # Ask the customer for the quantity of the menu item
-
+                    quantity =  input(f"How many {item_name.lower()}(s) would you like to order?\nNote: Pressing enter will default to 1{' ' * 11}:")
 
                     # Check if the quantity is a number, default to 1 if not
-
-
+                    if quantity.isdigit():
                     # Add the item name, price, and quantity to the order list
-
+                        quantity = int(quantity)
+                        order.append({
+                            "Item name": item_name,
+                            "Price": item_price,
+                            "Quantity": quantity
+                            })
+                    else:
+                        quantity = 1
 
                     # Tell the customer that their input isn't valid
-
+                else: 
+                    print(f"{menu_selection} is not an option in our {menu_category_name.lower()} list.")
 
                 # Tell the customer they didn't select a menu option
+            else:
+                print("You didn't select a number.")
 
         else:
             # Tell the customer they didn't select a menu option
@@ -153,30 +167,32 @@ while place_order:
 
     while True:
         # Ask the customer if they would like to order anything else
-        keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ")
+        keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ").lower().strip()
 
         # 5. Check the customer's input
-
+        match keep_ordering:
+            case "y":
                 # Keep ordering
-
+                place_order = True
                 # Exit the keep ordering question loop
-
+                break
+            case "n":
                 # Complete the order
-
+                place_order = False
                 # Since the customer decided to stop ordering, thank them for
                 # their order
-
+                print("Thank you for your order!")
                 # Exit the keep ordering question loop
-
-
+                break
+            case _:
                 # Tell the customer to try again
-
+                print(f"`{keep_ordering}` is not a valid input. Please try again!")
 
 # Print out the customer's order
 print("This is what we are preparing for you.\n")
 
 # Uncomment the following line to check the structure of the order
-#print(order)
+print(order)
 
 print("Item name                 | Price  | Quantity")
 print("--------------------------|--------|----------")
