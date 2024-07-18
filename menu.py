@@ -49,10 +49,10 @@ menu = {
         "Fried banana": 4.49
     }
 }
-
+"""
 # 1. Set up order list. Order list will store a list of dictionaries for
 # menu item name, item price, and quantity ordered
-order = []
+orders_list = []
 
 # Launch the store and present a greeting to the customer
 print("Welcome to the variety food truck!")
@@ -142,7 +142,7 @@ while place_order:
                     if quantity.isdigit():
                     # Add the item name, price, and quantity to the order list
                         quantity = int(quantity)
-                        order.append({
+                        orders_list.append({
                             "Item name": item_name,
                             "Price": item_price,
                             "Quantity": quantity
@@ -192,25 +192,32 @@ while place_order:
 print("This is what we are preparing for you.\n")
 
 # Uncomment the following line to check the structure of the order
-print(order)
+print(orders_list)
 
+"""
 print("Item name                 | Price  | Quantity")
 print("--------------------------|--------|----------")
+orders_list = [{'Item name': 'Cookie', 'Price': 0.99, 'Quantity': 12}, {'Item name': 'Teriyaki Chicken', 'Price': 9.99, 'Quantity': 12}]
 
 # 6. Loop through the items in the customer's order
-
+for order in orders_list:
+    
     # 7. Store the dictionary items as variables
-
+    item_name = order["Item name"]
+    price = order["Price"]
+    quantity = order["Quantity"]
 
     # 8. Calculate the number of spaces for formatted printing
-
+    num_item_spaces = 26 - len(item_name)
 
     # 9. Create space strings
-
+    item_spaces = " " * num_item_spaces
 
     # 10. Print the item name, price, and quantity
-
+    print(f"{item_name}{item_spaces}|{'$' + str(price):^8}|{' ' + str(quantity):<10}")
 
 # 11. Calculate the cost of the order using list comprehension
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
+total_cost = sum([order["Price"] * order["Quantity"] for order in orders_list])
+print("Total Cost:", total_cost)
