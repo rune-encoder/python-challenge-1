@@ -133,8 +133,7 @@ while place_order:
                     item_price = menu_items[menu_selection]["Price"]
 
                     # Ask the customer for the quantity of the menu item
-                    quantity = input(f"How many {item_name.lower(
-                    )}(s) would you like to order?\nNote: Pressing enter will default to 1:")
+                    quantity = input(f"How many {item_name.lower()}(s) would you like to order?\nNote: Pressing enter will default to 1:")
 
                     # Check if the quantity is a number, default to 1 if not
                     if quantity.isdigit():
@@ -211,8 +210,7 @@ for order in orders_list:
     item_spaces = " " * num_item_spaces
 
     # 10. Print the item name, price, and quantity
-    print(f"{item_name}{item_spaces}|{
-          '$' + str(price):^8}|{' ' + str(quantity):<10}")
+    print(f"{item_name}{item_spaces}|{'$' + str(price):^8}|{' ' + str(quantity):<10}")
 
 # 11. Calculate the cost of the order using list comprehension
 # Multiply the price by quantity for each item in the order list, then sum()
