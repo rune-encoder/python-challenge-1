@@ -1,3 +1,7 @@
+def print_custom(text, color='35', border=False):
+    border_line = "\n" + ('=' * 42) if border else ""
+    return print(f"\033[{color}m{text:^{42}}" + f"{border_line}\033[0m")
+
 # Menu dictionary
 menu = {
     "Snacks": {
@@ -55,14 +59,14 @@ menu = {
 orders_list = []
 
 # Launch the store and present a greeting to the customer
-print("Welcome to the variety food truck!")
+print_custom("Welcome to the variety food truck!", border=True)
 
 # Customers may want to order multiple items, so let's create a continuous
 # loop
 place_order = True
 while place_order:
     # Ask the customer from which menu category they want to order
-    print("From which menu would you like to order?")
+    print_custom("From which menu would you like to order?", color="36")
 
     # Create a variable for the menu item number
     i = 1
@@ -91,7 +95,7 @@ while place_order:
             print(f"You selected {menu_category_name}")
 
             # Print out the menu options from the menu_category_name
-            print(f"What {menu_category_name} item would you like to order?")
+            print_custom(f"What {menu_category_name} item would you like to order?", color="36")
             i = 1
             menu_items = {}
             print("Item # | Item name                | Price")
@@ -149,18 +153,18 @@ while place_order:
 
                     # Tell the customer that their input isn't valid
                 else:
-                    print(f"`{menu_selection}` is not an option in our {menu_category_name.lower()} menu.")
+                    print_custom(f"'{menu_selection}' is not an option in our {menu_category_name.lower()} menu.", color="31")
 
                 # Tell the customer they didn't select a menu option
             else:
-                print("You didn't select a number.")
+                print_custom("You didn't select a number.", color="31")
 
         else:
             # Tell the customer they didn't select a menu option
-            print(f"{menu_category} was not a menu option.")
+            print_custom(f"'{menu_category}' was not a menu option.", color="31")
     else:
         # Tell the customer they didn't select a number
-        print("You didn't select a number.")
+        print_custom("You didn't select a number.", color="31")
 
     while True:
         # Ask the customer if they would like to order anything else
@@ -179,15 +183,15 @@ while place_order:
                 place_order = False
                 # Since the customer decided to stop ordering, thank them for
                 # their order
-                print("Thank you for your order!")
+                print_custom("Thank you for your order!", border=True)
                 # Exit the keep ordering question loop
                 break
             case _:
                 # Tell the customer to try again
-                print(f"`{keep_ordering}` is not a valid input. Please try again!")
+                print_custom(f"'{keep_ordering}' is not a valid input. Please try again!", color="31")
 
 # Print out the customer's order
-print("This is what we are preparing for you.\n")
+print_custom("This is what we are preparing for you...\n", color="36")
 
 # Uncomment the following line to check the structure of the order
 # print(orders_list)
@@ -216,4 +220,4 @@ for order in orders_list:
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
 total_cost = sum([order["Price"] * order["Quantity"] for order in orders_list])
-print("Total Cost:", total_cost)
+print_custom(f"\nTotal Cost: {total_cost}", color="33", border=True)
