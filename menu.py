@@ -1,3 +1,4 @@
+# This function just styles the terminal when running the code. 
 def print_custom(text, color='35', border=False):
     border_line = "\n" + ('=' * 42) if border else ""
     return print(f"\033[{color}m{text:^{42}}" + f"{border_line}\033[0m")
